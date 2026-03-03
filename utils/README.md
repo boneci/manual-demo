@@ -1,12 +1,22 @@
-## Setup script
-This setup script prepares everything required to run a Firecracker microVM. It automatically downloads a compatible guest kernel and Ubuntu root filesystem, then converts the rootfs into an ext4 disk image that Firecracker can boot from.
+# Firecracker MicroVM Setup Script
 
-The root filesystem provided by Firecracker CI does not include SSH credentials, so the script generates a temporary SSH key pair and injects the public key into the VM. This allows you to log in once the microVM is running.
+## Overview
 
-Finally, the script verifies that all required artifacts (kernel image, rootfs, and SSH key) were created successfully.
+This setup script prepares everything required to run a **Firecracker microVM**.
+
+It automatically:
+
+* Downloads a compatible **guest Linux kernel**
+* Downloads an **Ubuntu root filesystem**
+* Converts the root filesystem into a bootable **ext4 disk image**
+* Generates and injects SSH credentials
+* Verifies that all required artifacts were created successfully
 
 **Reference:**
 [Firecracker Getting Started — RootFS & Kernel](https://github.com/firecracker-microvm/firecracker/blob/main/docs/getting-started.md#getting-a-rootfs-and-guest-kernel-image)
+
+You can run ```setup.sh``` or copy the below code and run it in this utils directory
+
 ```bash
 ARCH="$(uname -m)"
 release_url="https://github.com/firecracker-microvm/firecracker/releases"
