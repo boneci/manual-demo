@@ -1,4 +1,4 @@
-## Runner
+# Runner
 
 `runner/` contains the scripts responsible for launching, managing, and monitoring Firecracker microVMs used for CI execution.
 

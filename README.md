@@ -20,5 +20,3 @@ In rootfs is where mounting is done
 
 - ci.sh: This script is responsible for executing commands to firecracker
 - 
-
-# manual-demo
