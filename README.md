@@ -160,11 +160,45 @@ After this step, Firecracker is ready to run.
 
 
 
+
 ## Phase 2 — Prepare the Root Filesystem
 
-This step configures what the VM will execute when it boots.
+This phase prepares the base Ubuntu image and injects your CI logic into it.
 
-### Configure the rootfs
+It happens in **two steps**.
+
+
+
+### Step 2.1 — Setup Base Rootfs (One-Time Initialization)
+
+```bash
+cd utils/
+sudo ./setup.sh
+```
+
+What this typically does:
+
+* Downloads or prepares the Ubuntu base image
+* Creates the `.ext4` root filesystem
+* Installs base packages required for booting
+* Ensures the image is ready for modification
+
+Think of this as:
+
+> “Create a clean Ubuntu disk image that Firecracker can boot.”
+
+You only run this again if:
+
+* You want a fresh base image
+* You upgrade Ubuntu version
+* The rootfs gets corrupted
+* You want to rebuild from scratch
+
+
+
+### Step 2.2 — Inject CI Boot Logic
+
+After the base image exists, now configure it:
 
 ```bash
 ./runner/rootfs-config.sh
@@ -173,17 +207,21 @@ This step configures what the VM will execute when it boots.
 What happens here:
 
 * Mounts the Ubuntu `.ext4` image
-* Injects `/init.sh` (your CI job logic)
+* Injects `/init.sh` (your CI logic)
 * Configures `rc.local`
 * Enables `rc-local.service`
 * Disables background apt timers
 * Unmounts the image
 
-You only need to run this again if:
+This step defines:
 
-* You modify the CI job logic
+> “What should the VM do when it boots?”
+
+You need to re-run this if:
+
+* You modify the CI script
 * You change dependencies
-* You rebuild the rootfs image
+* You change build logic
 
 
 ## Phase 3 — Run the CI VM
@@ -195,6 +233,7 @@ Now we actually launch the microVM.
 In one terminal:
 
 ```bash
+cd bin/
 sudo ./firecracker
 ```
 
@@ -262,7 +301,6 @@ This will:
 
 
 # Full Execution Order (Quick Summary)
-
 Here’s the minimal sequence:
 
 ```
