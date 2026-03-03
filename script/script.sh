@@ -10,15 +10,16 @@ echo "IP: $(hostname -I || true)"
 export DEBIAN_FRONTEND=noninteractive
 
 # --- Install dependencies ---
-# dpkg --add-architecture i386
-#
-# apt-get update -o Acquire::Retries=3 -o Acquire::http::Timeout=10
-#
-# apt-get install -y \
-#     gcc-multilib \
-#     git \
-#     make \
-#     ca-certificates
+dpkg --add-architecture i386
+
+apt-get update -o Acquire::Retries=3 -o Acquire::http::Timeout=10
+
+apt-get install -y \
+    gcc-multilib \
+    git \
+    make \
+    ca-certificates
+
 # --- Clone your repository ---
 git clone https://github.com/ankushT369/cfxpool.git /tmp/test
 cd /tmp/test 
