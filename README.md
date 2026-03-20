@@ -1,4 +1,3 @@
-
 # Getting Started
 
 This is a minimal setup for running a **Firecracker-based CI job**.

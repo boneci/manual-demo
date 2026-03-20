@@ -189,7 +189,7 @@ curl --unix-socket "$FC_SOCK" -X PUT http://localhost/drives/rootfs \
     -H "Content-Type: application/json" \
     -d "{
         \"drive_id\": \"rootfs\",
-        \"path_on_host\": \"${ORIG_ROOTFS_IMG}\",
+        \"path_on_host\": \"${ROOTFS_IMG}\",
         \"is_root_device\": true,
         \"is_read_only\": false
     }"
